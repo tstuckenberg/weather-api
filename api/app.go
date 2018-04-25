@@ -28,7 +28,7 @@ func (a *App) Initialize() {
 
 //Run App
 func (a *App) Run(addr string) {
-	log.Fatal(http.ListenAndServe(":9001", a.Router))
+	log.Fatal(http.ListenAndServe(addr, a.Router))
 }
 
 //Initialize routes

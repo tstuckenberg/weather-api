@@ -45,7 +45,7 @@ func (r *Resource) HandleGetWeather(c *gin.Context) {
 		weather, err := GetWeather(city)
 
 		if err != nil {
-			c.JSON(http.StatusNotFound, ErrorResponse{
+			c.JSON(http.StatusInternalServerError, ErrorResponse{
 				Message: err,
 				Success: false,
 			})
