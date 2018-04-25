@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//---- Allocation Request API ----
+//---- Weather API Controllers---- //
 
 //ConditionsResponse type
 type ConditionsResponse struct {
@@ -17,7 +17,7 @@ type ConditionsResponse struct {
 
 //ErrorResponse type
 type ErrorResponse struct {
-	Message error `json:"message,omitempty"`
+	Message error `json:"message"`
 	Success bool  `json:"success"`
 }
 
@@ -29,12 +29,11 @@ func (r *Resource) RenderError(c *gin.Context, status int, message error) {
 	})
 }
 
-//HandleGetWeather decommissions an Allocation
+//HandleGetWeather handles call to GetWeather function
 func (r *Resource) HandleGetWeather(c *gin.Context) {
 
 	if c.Request.URL.Query()["city"] == nil {
 
-		// if len(c.Request.URL.Query()["city"]) == 0 {
 		c.JSON(http.StatusBadRequest, ErrorResponse{
 			Message: errors.New("Please specify a location"),
 			Success: false,

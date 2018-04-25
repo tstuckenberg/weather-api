@@ -1,29 +1,45 @@
-# Fibre-API
-Fibre API with Golang
+# Weather API Challenge
 
-First we need to create our Go environment
+## Prerequisites
 
-```
+### Install Go 1.10.1 from the website
+[Golang](https://golang.org/dl/ "Golang")
+
+### Create Go environment
+
 mkdir bin # for go binaries
+
 mkdir pkg # for go external libraries
+
 mkdir src # for your own go code
 
-export PATH=$PATH:[your_path_to]/bin
+export GOPATH=$PATH:[your_path]/
 
-# Import goimports command
-go get golang.org/x/tools/cmd/goimports
+export GOBIN=$GOPATH/bin
 
 
-cd src ; git clone git@git.vocus.net:gis/fibre-api.git
+### Install dependencies
 
-cd fibre-api ; ls # should return as below:
-LICENSE		README.md	apidoc.apib	fibre-api
+```go get```
 
-```
+### Start api
 
-Start working with Go
+```go install```
 
-```
-cd fibre-api
-go run
+```cd [your_path]/bin/```
+
+```./api```
+
+## Get weather
+
+```<domain>/v1/weather?city=sydney```
+
+```json
+{
+  "weather": {
+    "wind_speed": 17.7,
+    "temperature_degrees": 20
+  },
+  "success": true
+}
 ```

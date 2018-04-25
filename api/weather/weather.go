@@ -19,6 +19,7 @@ type Conditions struct {
 //GetWeather fetches current weather for specified city
 func GetWeather(city string) (Conditions, error) {
 
+	//Create empty conditions object
 	w := Conditions{}
 
 	//Query for Yahoo weather API
@@ -45,8 +46,9 @@ func GetWeather(city string) (Conditions, error) {
 			return w, err
 		}
 		//Format response
-		w.FormatopenweathermapResp(body)
+		w.FormatOpenweathermapResp(body)
 
+		//Return
 		return w, err
 
 	}
@@ -65,7 +67,7 @@ func GetWeather(city string) (Conditions, error) {
 
 }
 
-//This was the wrong approach and stuct  should have been defined from responses
+//This was the wrong approach and stucts  should have been defined for responses; a bit of an experiment
 //ParseResponse pareses http response body returning a JSON
 func ParseResponse(resp *http.Response) (map[string]interface{}, error) {
 
@@ -111,20 +113,23 @@ func (w *Conditions) FormatYahooResponse(body map[string]interface{}) Conditions
 		w.TemperatureDegrees = tempFloat
 	}
 
+	//return weather conditions
 	return *w
 }
 
-//FormatopenweathermapResp formats Yahoo Weather API response to weather conditionns
-func (w *Conditions) FormatopenweathermapResp(body map[string]interface{}) Conditions {
+//FormatOpenweathermapResp formats Yahoo Weather API response to weather conditionns
+func (w *Conditions) FormatOpenweathermapResp(body map[string]interface{}) Conditions {
 	fmt.Println(body)
 
 	windString := body["wind"].(map[string]interface{})["speed"].(float64)
 	tempString := body["main"].(map[string]interface{})["temp"].(float64)
 
+	//As Open Weather Map return temperature in Kelvin we need to convert to degrees celsius
 	kelvin := 273.15
 
 	w.WindSpeed = windString
 	w.TemperatureDegrees = (tempString - kelvin)
 
+	//return weather conditions
 	return *w
 }
