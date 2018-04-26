@@ -14,7 +14,7 @@ func TestMainExecution(t *testing.T) {
 
 	go main()
 
-	resp, err := http.Get("http://localhost:9001/checkHealth")
+	resp, err := http.Get("http://localhost:9000/checkHealth")
 
 	if err != nil {
 		t.Fatalf("Cannot make get: %v\n", err)
